@@ -155,12 +155,31 @@ public class Facturation {
         String code = scanner.next();
         System.out.println("Libelle produit :");
         String libelle = scanner.next();
-        System.out.println("Prix HT produit :");
-        String prixtemp = scanner.next();
-       
-        String[] parts = prixtemp.split("\\.");
 
-        produits.add(new Produit(Integer.parseInt(code), libelle, Integer.parseInt(parts[0] + parts[1]), typeProduit));
+        int prix = demandePrixProduit();
+
+        produits.add(new Produit(Integer.parseInt(code), libelle, prix, typeProduit));
+
+    }
+
+    private int demandePrixProduit(){
+
+        boolean checkPrix = true;
+        while(checkPrix){
+
+            System.out.println("Prix HT produit(ex : 10.00) :");
+            String prixtemp = scanner.next();
+           
+            String[] parts = prixtemp.split("\\.");
+
+            if (Integer.parseInt(parts[0] + parts[1]) == 0) {
+                System.out.println("pas de zero");
+            } else {
+                return Integer.parseInt(parts[0] + parts[1]);
+            }
+            
+        }
+        return 1;
 
     }
 
